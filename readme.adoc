@@ -1,0 +1,4 @@
+# Easyredmine Pipeline Library
+
+## Under development
+WARNING: This module is under heavy development and not yet ready to be used.
