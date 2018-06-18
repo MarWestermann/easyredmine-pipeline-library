@@ -2,26 +2,17 @@
 import de.intersales.jenkins.easyredmine.Utils
 import groovy.xml.MarkupBuilder
 
-import static de.intersales.jenkins.easyredmine.Utils.*
-
 def call(Map data) {
-    def easyredmineBaseUrl = data["easyredmineBaseUrl"]
-    def authKey = data["authKey"] as String
-    def ticketNo = data["ticketNo"]
-    def comment = data["comment"]
     
     def sw = new StringWriter()
     def mb = new MarkupBuilder(sw)
     mb.issue {
-        notes {
-            p {comment}
-        }
+        notes (data.comment)
     }
     
-    def xml = '''<issue>
-        <notes><p>$comment</p></notes>
-    </issue>
-    '''
+    println("using the following put request data:\n${sw.toString()}")
     
-    new Utils().put("$easyredmineBaseUrl/issues/$ticketNo",mb.toString(), authKey )
+    new Utils().put("${data.easyredmineBaseUrl}/issues/${data.ticketNo}.xml", sw.toString(), data.authKey)
 }
+
+return this

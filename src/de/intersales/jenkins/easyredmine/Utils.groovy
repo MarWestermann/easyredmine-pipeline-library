@@ -40,7 +40,7 @@ String post(String resourceUrl, String body, String token) {
 String put(String resourceUrl, String body, String token) {
     def url = addKeyParamToUrl(resourceUrl, token)
     def client = new OkHttpClient()
-    def XML = MediaType.parse("application/xml; charset=utf-8")
+    def XML = MediaType.parse("application/xml")
     def requestBody = RequestBody.create(XML, body)
     def request = new Request.Builder()
             .url(url)
@@ -49,7 +49,7 @@ String put(String resourceUrl, String body, String token) {
             .build()
     def response = client.newCall(request).execute()
     if (!(200..299).contains(response.code())) {
-        throw new Exception("POST to easyredmine with url $url failed with status code ${response.code()}")
+        throw new Exception("PUT to easyredmine with url $url failed with status code ${response.code()}\n${response.body().string()}")
     }
     return response.body().string()
 }
