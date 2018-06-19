@@ -22,12 +22,12 @@ class EasyRedminePluginTest {
         easyTicketChangeStatus easyredmineBaseUrl: EASY_BASE_URL,
                 authKey: EASY_AUTH_TOKEN,
                 ticketNo: '1979',
-                status: 'Neu'
+                status: 'Zum Test'
         
         def ticketData = new easyTicketGet().call easyredmineBaseUrl: EASY_BASE_URL,
                 authKey: EASY_AUTH_TOKEN,
                 ticketNo: '1979'
-        assert ticketData.status.@id.text() == "1"
+        assert ticketData.status.@id.text() == "10"
     
         easyTicketChangeStatus easyredmineBaseUrl: EASY_BASE_URL,
                 authKey: EASY_AUTH_TOKEN,
