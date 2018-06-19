@@ -15,16 +15,10 @@ import groovy.xml.MarkupBuilder
 def call(Map data) {
     
     def statusId = mapStatusNameToId(data)
+    def xml = """<issue><status_id>$statusId</status_id></issue>"""
     
-    def sw = new StringWriter()
-    def mb = new MarkupBuilder(sw)
-    mb.issue {
-        status_id( statusId )
-    }
-    
-    println("using the following put request data:\n${sw.toString()}")
-    
-    new Utils().put("${data.easyredmineBaseUrl}/issues/${data.ticketNo.toString()}.xml", sw.toString(), data.authKey)
+    new Utils().put("${data.easyredmineBaseUrl}/issues/${data.ticketNo.toString()}.xml",
+            xml, data.authKey)
 }
 
 private def mapStatusNameToId(Map data) {
