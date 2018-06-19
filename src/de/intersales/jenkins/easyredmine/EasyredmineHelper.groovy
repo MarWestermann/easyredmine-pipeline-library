@@ -12,7 +12,7 @@ class EasyredmineHelper {
         xmlObject."issue_status".each {issueStatus ->
             if (issueStatus.name == data.status) {
                 println("found status id")
-                result = issueStatus.id.text()
+                result = issueStatus.'id'.text()
             }
         }
         
