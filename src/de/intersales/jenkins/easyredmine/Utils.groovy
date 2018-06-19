@@ -12,6 +12,7 @@ class Utils {
     @NonCPS
     String get(String resourceUrl, String token) {
         def url = addKeyParamToUrl(resourceUrl, token)
+        println "calling GET on url $url"
         def client = new OkHttpClient()
         def request = new Request.Builder()
                 .url(url)

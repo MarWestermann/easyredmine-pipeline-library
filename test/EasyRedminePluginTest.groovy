@@ -50,4 +50,36 @@ class EasyRedminePluginTest {
         assert ticketData instanceof GPathResult
         assert ticketData.id == 1979
     }
+    
+    @Test
+    void testGetTicketsByFilter() {
+        def easyProjectGetTicketsByFilter = new easyProjectGetTicketsByFilter()
+        def result = easyProjectGetTicketsByFilter easyredmineBaseUrl: EASY_BASE_URL,
+                authKey: EASY_AUTH_TOKEN,
+                filter: [project_id: 76, status_id: 1]
+        
+        assert result instanceof List
+        
+        println result
+        assert result.size() == 2
+        assert result.contains("1981")
+        assert result.contains("2151")
+        
+    }
+    
+    @Test
+    void testGetTicketsByFilterWithSpecialStatusFilter() {
+        def easyProjectGetTicketsByFilter = new easyProjectGetTicketsByFilter()
+        def result = easyProjectGetTicketsByFilter easyredmineBaseUrl: EASY_BASE_URL,
+                authKey: EASY_AUTH_TOKEN,
+                filter: [project_id: 76, status: "Neu"]
+        
+        assert result instanceof List
+        
+        println result
+        assert result.size() == 2
+        assert result.contains("1981")
+        assert result.contains("2151")
+        
+    }
 }

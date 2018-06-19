@@ -14,7 +14,7 @@ import de.intersales.jenkins.easyredmine.Utils
 
 def call(Map data) {
     
-    def statusId = new EasyredmineHelper().mapStatusNameToId(data)
+    def statusId = new EasyredmineHelper().mapStatusNameToId(data.easyredmineBaseUrl, data.authKey, data.status)
     def xml = """<issue><status_id>${statusId}</status_id></issue>"""
     
     println "changing ticket with data:\n $xml"
