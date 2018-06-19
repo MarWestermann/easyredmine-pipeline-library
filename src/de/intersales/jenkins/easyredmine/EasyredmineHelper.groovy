@@ -6,8 +6,8 @@ class EasyredmineHelper {
     
     @NonCPS
     String mapStatusNameToId(Map data) {
-        def xml = new Utils().get("${data.easyredmineBaseUrl}/issue_statuses.xml", data.authKey)
-        def xmlObject = new XmlSlurper().parseText(xml)
+        /*def statusXmlResult = new Utils().get("${data.easyredmineBaseUrl}/issue_statuses.xml", data.authKey)
+        def xmlObject = new XmlSlurper().parseText(statusXmlResult)
         def result = "0"
         
         xmlObject.children().each {child ->
@@ -17,7 +17,7 @@ class EasyredmineHelper {
             }
         }
         
-        println "mapped status name ${data.status} to id ${result}"
+        println "mapped status name ${data.status} to id ${result}"*/
         
         return "10"
         
