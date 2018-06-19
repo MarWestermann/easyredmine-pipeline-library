@@ -19,7 +19,7 @@ class EasyredmineHelper {
         
         println "mapped status name ${data.status} to id ${result}"
         
-        return result
+        return "10"
         
     }
 }
