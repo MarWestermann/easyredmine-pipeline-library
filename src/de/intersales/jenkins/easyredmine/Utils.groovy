@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 
+
 String get(String resourceUrl, String token) {
     def url = addKeyParamToUrl(resourceUrl, token)
     def client = new OkHttpClient()
@@ -63,5 +64,3 @@ String addKeyParamToUrl(String resourceUrl, String token) {
         return resourceUrl + "?key=$token"
     }
 }
-
-return this
