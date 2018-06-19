@@ -9,14 +9,15 @@ class EasyredmineHelper {
         def xml = new Utils().get("${data.easyredmineBaseUrl}/issue_statuses.xml", data.authKey)
         def xmlObject = new XmlSlurper().parseText(xml)
         def result = "0"
-        xmlObject."issue_status".each {issueStatus ->
-            if (issueStatus.name == data.status) {
+        
+        xmlObject.children().each {child ->
+            if (child.name == data.status) {
                 println("found status id")
-                result = issueStatus.'id'.text()
+                result = child.'id'.text()
             }
         }
         
-        println("mapped status name ${data.status} to id ${result}")
+        println "mapped status name ${data.status} to id ${result}"
         
         return result
         
