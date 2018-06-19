@@ -3,8 +3,9 @@ import org.junit.Test
 import easyTicketAddComment
 class EasyRedminePluginTest {
     
-    private static final String EASY_BASE_URL = ''
-    private static final String EASY_AUTH_TOKEN = ''
+    // the env vars needs to be added to either your system or the run configuration of the test
+    private static final String EASY_BASE_URL = System.getenv()["EASY_BASE_URL"]
+    private static final String EASY_AUTH_TOKEN = System.getenv()["EASY_AUTH_TOKEN"]
     
     @Test
     void testAddComment() {
