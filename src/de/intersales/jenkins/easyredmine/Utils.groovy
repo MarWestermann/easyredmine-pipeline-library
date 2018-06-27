@@ -20,7 +20,11 @@ class Utils {
                 .build()
         def response = client.newCall(request).execute()
         if (!(200..299).contains(response.code())) {
-            throw new Exception("POST to easyredmine with url $url failed with status code ${response.code()}")
+            if (response.code() == 404) {
+                throw new NotFoundException("The requested site could not be found")
+            } else {
+                throw new Exception("GET to easyredmine with url $url failed with status code ${response.code()}")
+            }
         }
         return response.body().string()
     }
