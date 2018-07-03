@@ -92,47 +92,10 @@ class EasyRedminePluginTest {
     }
     
     @Test
-    void testScriptContent() {
-        def branch = 'er-12345'
-        def branchNameCleaned = branch.toUpperCase().replaceFirst('-', '_')
-        assert branchNameCleaned.startsWith("ER_")
-        
-        assert "12345" == branchNameCleaned.replaceFirst("ER_", "")
-        
-        
-        def diff = """.gitignore
-Dockerfile
-Jenkinsfile
-app/code/InterSales/MyProject/composer.json
-app/code/InterSales/MyProject/datei.json
-app/design/frontend/Fipa/core
-app/design/frontend/Fipa/core/.gitignore
-app/design/frontend/Fipa/core/InterSales_CustomForms/templates/webforms/fields/file.phtml
-app/design/frontend/Fipa/core/InterSales_CustomForms/web/css/source/_extend.less
-app/design/frontend/Fipa/core/InterSales_Fileuploader/templates/uploader.phtml
-app/design/frontend/Fipa/core/InterSales_FipaBluefoot/web/css/source/_extend.less
-app/design/frontend/Fipa/core/Magento_Catalog/layout/catalog_category_view.xml
-app/design/frontend/Fipa/core/Magento_Catalog/layout/catalog_product_view.xml
-app/design/frontend/Fipa/core/Magento_Catalog/templates/product/list.phtml
-app/design/frontend/Fipa/core/Magento_Catalog/templates/product/list_print_catalog.phtml
-""".trim()
-        
-        def diffList = diff.split("\n").toList()
-        
-        def changedModules = diffList.findAll {it.startsWith("app/code/InterSales")}.collect { it =~ /app\/code\/InterSales\/(\w+)\/.+/}.collect{it[0][1]}.toSet()
-        
-        assert changedModules.size() == 1
-        
-        changedModules.each { module ->
-            if (diffList.findAll{it == "app/code/InterSales/$module/composer.json"}.isEmpty()) {
-                throw new Exception("Module $module changed but composer.json does not")
-            }
-        }
-        
-        new File("").readBytes()
-        
-        
-        
-    
+    void testFileAsBase64() {
+        def fileAsBase64 = new fileAsBase64()
+        def filename = new File("testresources/test.zip").absolutePath
+        def result = fileAsBase64 filename: filename
+        print(result)
     }
 }
