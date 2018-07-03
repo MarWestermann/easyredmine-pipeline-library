@@ -94,7 +94,10 @@ class EasyRedminePluginTest {
     @Test
     void testScriptContent() {
         def branch = 'er-12345'
-        assert branch.toUpperCase().replaceFirst('-', '_').startsWith("ER_")
+        def branchNameCleaned = branch.toUpperCase().replaceFirst('-', '_')
+        assert branchNameCleaned.startsWith("ER_")
+        
+        assert "12345" == branchNameCleaned.replaceFirst("ER_", "")
         
         
         def diff = """.gitignore
@@ -125,6 +128,8 @@ app/design/frontend/Fipa/core/Magento_Catalog/templates/product/list_print_catal
                 throw new Exception("Module $module changed but composer.json does not")
             }
         }
+        
+        new File("").readBytes()
         
         
         
