@@ -7,6 +7,7 @@
  */
 def call(Map data) {
     String filename = data.filename
+    echo pwd
     return Base64.getEncoder().encode(new File(filename).readBytes())
 }
 
