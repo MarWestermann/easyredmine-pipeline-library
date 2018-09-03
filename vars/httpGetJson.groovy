@@ -15,8 +15,6 @@ def call(Map data) {
     String url = data.url
 
     def client = new OkHttpClient()
-    def JSON = MediaType.parse("application/json; charset=utf-8")
-    
     def request = new Request.Builder()
             .url(url)
             .get()
