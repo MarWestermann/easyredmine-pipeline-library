@@ -31,13 +31,13 @@ class EasyRedminePluginTest {
     
         easyTicketChangeStatus easyredmineBaseUrl: EASY_BASE_URL,
                 authKey: EASY_AUTH_TOKEN,
-                ticketNo: '1979',
-                status: 'Erledigt'
+                ticketNo: '3381',
+                status: 'Ausgerollt im Testshop'
     
         ticketData = new easyTicketGet().call easyredmineBaseUrl: EASY_BASE_URL,
                 authKey: EASY_AUTH_TOKEN,
                 ticketNo: '1979'
-        assert ticketData.status.@id.text() == "5"
+        assert ticketData.status.@id.text() == "8"
     }
     
     @Test
@@ -97,5 +97,15 @@ class EasyRedminePluginTest {
         def filename = new File("testresources/test.zip").absolutePath
         def result = fileAsBase64 filename: filename
         print(result)
+    }
+    
+    @Test
+    void testTimestamp() {
+        def filename = "Webinars.zip"
+        def timestamp = new Date().format("-yyyyMMddhhmmss")
+        
+        def newFilename = filename.replace(".zip", "") + timestamp + ".zip"
+        
+        println newFilename
     }
 }
